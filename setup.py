@@ -6,13 +6,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="sharepoint-mcp",
     version="0.1.0",
-    author="yourname",  # Update this with your name
-    author_email="your.email@example.com",  # Update this with your email
+    author="Luther Systems",
+    author_email="support@luthersystems.com",
     description="SharePoint Model Context Protocol (MCP) server for LLM applications",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/DEmodoriGatsuO/sharepoint-mcp",
+    url="https://github.com/luthersystems/sharepoint-mcp",
     packages=find_packages(),
+    py_modules=['server'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

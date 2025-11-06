@@ -1,4 +1,5 @@
 # Packages to support different file formats
+import io
 import logging
 from typing import Dict, Any, Optional
 

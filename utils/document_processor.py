@@ -1,31 +1,48 @@
-"""Document processing utilities for SharePoint MCP server."""
-
-import io
+# Packages to support different file formats
 import logging
 from typing import Dict, Any, Optional
 
-# Packages to support different file formats
+logger = logging.getLogger("document_processor")
+
+HAS_DOCUMENT_LIBRARIES = True
+MISSING_LIBRARIES = []
+
 try:
     import pandas as pd
-    import docx
-    from PyPDF2 import PdfReader
-    import openpyxl
-    HAS_DOCUMENT_LIBRARIES = True
-except ImportError:
+except ImportError as e:
     HAS_DOCUMENT_LIBRARIES = False
+    MISSING_LIBRARIES.append("pandas")
 
-# Setup logging
-logger = logging.getLogger("document_processor")
+try:
+    import docx
+except ImportError as e:
+    HAS_DOCUMENT_LIBRARIES = False
+    MISSING_LIBRARIES.append("python-docx")
+
+try:
+    from PyPDF2 import PdfReader
+except ImportError as e:
+    HAS_DOCUMENT_LIBRARIES = False
+    MISSING_LIBRARIES.append("PyPDF2")
+
+try:
+    import openpyxl
+except ImportError as e:
+    HAS_DOCUMENT_LIBRARIES = False
+    MISSING_LIBRARIES.append("openpyxl")
 
 class DocumentProcessor:
     """Processor for various document types."""
-    
+
     @staticmethod
     def check_dependencies():
         """Check if all required dependencies are installed."""
         if not HAS_DOCUMENT_LIBRARIES:
-            logger.warning("Document processing libraries are not installed.")
-            logger.warning("Please install with: pip install pandas python-docx PyPDF2 openpyxl")
+            missing = ", ".join(MISSING_LIBRARIES) or "unknown"
+            logger.warning("Missing document processing libraries: %s", missing)
+            logger.warning(
+                "Please install with: pip install pandas python-docx PyPDF2 openpyxl"
+            )
             return False
         return True
     

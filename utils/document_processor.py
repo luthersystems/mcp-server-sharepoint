@@ -1,5 +1,6 @@
 # Packages to support different file formats
 import logging
+from typing import Dict, Any, Optional
 
 logger = logging.getLogger("document_processor")
 
@@ -29,7 +30,6 @@ try:
 except ImportError as e:
     HAS_DOCUMENT_LIBRARIES = False
     MISSING_LIBRARIES.append("openpyxl")
-
 
 class DocumentProcessor:
     """Processor for various document types."""

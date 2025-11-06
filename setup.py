@@ -25,6 +25,9 @@ setup(
         "msal>=1.20.0",
         "requests>=2.28.0",
         "pandas>=1.5.0",
+        "python-docx>=0.8.11",
+        "PyPDF2>=3.0.0",
+        "openpyxl>=3.1.0",
         "python-dotenv>=0.21.0",
     ],
     extras_require={
